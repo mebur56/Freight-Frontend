@@ -1,28 +1,30 @@
-import { UploadActions, UploadState, uploadTypes } from "./interfaces"
+import { FreightsActions, FreightsState, freightsTypes } from "./interfaces"
 
 
-const initialState: UploadState = {
+const initialState: FreightsState = {
     success: false,
     finished: false,
+    freights: null,
     pending: false,
 }
 
-export default (state = initialState, action: UploadActions) => {
+export default (state = initialState, action: FreightsActions) => {
     switch (action.type) {
-        case uploadTypes.UPLOAD_REQUEST:
+        case freightsTypes.FREIGHTS_REQUEST:
             return {
                 ...state,
                 pending: true,
                 finished: false
             }
-        case uploadTypes.UPLOAD_SUCCESS:
-            return {
-                ...state,
-                success: true,
+            case freightsTypes.FREIGHTS_SUCCESS:
+                return {
+                    ...state,
+                    success: true,
                 finished: true,
-                pending: false
+                pending: false,
+                freights: action.payload
             }
-        case uploadTypes.UPLOAD_FAILURE:
+        case freightsTypes.FREIGHTS_FAILURE:
             return {
                 ...state,
                 success: false,

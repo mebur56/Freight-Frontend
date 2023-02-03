@@ -1,20 +1,18 @@
-import { uploadTypes } from "./types";
+export enum uploadTypes {
+    UPLOAD_REQUEST = "UPLOAD_REQUEST",
+    UPLOAD_SUCCESS = "UPLOAD_SUCCESS",
+    UPLOAD_FAILURE = "UPLOAD_FAILURE"
+}
 
 export interface UploadState {
+    success: boolean;
+    finished: boolean;
     pending: boolean;
-    upload: any;
-    error: string | null;
 }
 
 
-export interface UploadFailurePayload {
-    error: string;
-}
-export interface UploadSuccessPayload {
-    success: string;
-}
 export interface UploadRequestPayload {
-    file: string;
+    fileForm: FormData;
 }
 
 export interface UploadRequest {
@@ -22,17 +20,19 @@ export interface UploadRequest {
     payload: UploadRequestPayload
 }
 
-export type UploadSuccess = {
+export interface UploadSuccess {
     type: typeof uploadTypes.UPLOAD_SUCCESS;
-    payload: UploadSuccessPayload;
 };
 
-export type UploadFailure = {
+export interface UploadFailure {
     type: typeof uploadTypes.UPLOAD_FAILURE;
-    payload: UploadFailurePayload;
 };
 
 export type UploadActions =
     | UploadRequest
     | UploadSuccess
     | UploadFailure;
+
+
+
+

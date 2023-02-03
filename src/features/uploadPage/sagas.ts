@@ -2,22 +2,17 @@ import { all, AxiosResponse } from "axios"
 import { call, put, takeEvery, takeLatest } from "redux-saga/effects"
 import * as api from "../../app/api"
 import { UploadFailureAction, UploadSuccessAction } from "./action"
-import { uploadTypes } from "./types"
+import { UploadRequest, uploadTypes } from "./interfaces"
 
-function* uploadFileSaga() {
+
+function* uploadFileSaga(action: UploadRequest) {
     try {
-        console.log("sagas")
-        const response: AxiosResponse = yield call(api.uploadFile, "TODO")
-        console.log(response);
-        yield put(UploadSuccessAction({
-            success: "success"
-        }))
+        const response: AxiosResponse = yield call(api.uploadFile, action.payload.fileForm)
+        yield put(UploadSuccessAction())
     }
     catch (e) {
         yield put(
-            UploadFailureAction({
-                error: "Unknow Error"
-            })
+            UploadFailureAction()
         )
     }
 }

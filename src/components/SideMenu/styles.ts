@@ -3,7 +3,7 @@ const styles = {
     width: 250
   },
   menu :{
-    backgroundColor: "grey",
+    backgroundColor: "white",
     color: "black",
   }
 }

@@ -15,9 +15,10 @@ const store = configureStore({
         serializableCheck: false,
         thunk: false
     }).concat(sagaMiddleware)
-}
-)
+})
 
 sagaMiddleware.run(rootSaga);
+
+export type RootState = ReturnType<typeof store.getState>
 
 export default store

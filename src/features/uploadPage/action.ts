@@ -3,13 +3,11 @@ import {
     UploadSuccess,
     UploadFailure,
     UploadRequest,
-    UploadFailurePayload,
-    UploadSuccessPayload,
     UploadRequestPayload,
+    uploadTypes,
 
 } from './interfaces'
 
-import { uploadTypes } from './types'
 
 
 export const UploadRequestAction = (payload: UploadRequestPayload): UploadRequest => (
@@ -18,16 +16,14 @@ export const UploadRequestAction = (payload: UploadRequestPayload): UploadReques
         payload
     }
 )
-export const UploadSuccessAction = (payload: UploadSuccessPayload): UploadSuccess => (
+export const UploadSuccessAction = (): UploadSuccess => (
     {
         type: uploadTypes.UPLOAD_SUCCESS,
-        payload
     }
 )
-export const UploadFailureAction = (payload: UploadFailurePayload): UploadFailure => (
+export const UploadFailureAction = (): UploadFailure => (
     {
 
         type: uploadTypes.UPLOAD_FAILURE,
-        payload
     }
 )

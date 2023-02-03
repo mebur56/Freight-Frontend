@@ -3,17 +3,20 @@ import { InboxOutlined, Upload } from "@mui/icons-material";
 import { ListItem, ListItemIcon, ListItemText, Drawer, ListItemButton } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { UploadRequestAction } from "../../features/uploadPage/action";
 
 
 
-function SideMenu() {
-    const [open, setOpen] = useState(true);
+interface Props {
+    open: boolean;
+    handleToogle(open: boolean): any
+    handleLabel(label: string): any
+}
+
+function SideMenu(props: Props) {
+    const { open, handleToogle, handleLabel } = props
     const navigate = useNavigate();
-    const dispatch = useDispatch();
-    dispatch(UploadRequestAction({file: "teste"}))
-    
+
+
     const data = [
 
         { name: "Upload de Frete", icon: <Upload />, link: "/" },
@@ -24,7 +27,10 @@ function SideMenu() {
         <div style={styles.menuButton} >
             {data.map((item, index) => (
                 <ListItem key={index}>
-                    <ListItemButton onClick={() => { navigate(item.link) }}>
+                    <ListItemButton onClick={() => {
+                        navigate(item.link)
+                        handleLabel(item.name)
+                    }}>
                         <ListItemIcon>{item.icon}</ListItemIcon>
                         <ListItemText primary={item.name} />
                     </ListItemButton>
@@ -39,11 +45,11 @@ function SideMenu() {
         <Drawer PaperProps={{
             sx: styles.menu
         }}
-            variant={"permanent"} open={open} anchor={"left"} onClose={() => setOpen(false)}>
+            variant={"temporary"} open={open} anchor={"left"} onClose={() => handleToogle(false)}>
             {getList()}
         </Drawer>
     )
 }
 
 
-  export default SideMenu;
+export default SideMenu;
