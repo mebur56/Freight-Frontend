@@ -11,6 +11,6 @@ export function uploadFile(fileForm: FormData) {
     )
 }
 
-export function getFreights() {
-    return axiosClient.get('/freight')
+export function getFreights(filterType?: string, filterText?: string) {
+    return axiosClient.get(`/freight?filterType=${filterType ? filterType : ''}&filterText=${filterText ? filterText : ''}`)
 }

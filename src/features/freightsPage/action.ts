@@ -3,19 +3,21 @@ import {
     FreightsSuccess,
     FreightsFailure,
     FreightsRequest,
-    FreightsSuccessPayload,
     freightsTypes,
+    Freight,
+    RequestFilterPayload,
 
 } from './interfaces'
 
 
 
-export const FreightsRequestAction = (): FreightsRequest => (
+export const FreightsRequestAction = (payload?: RequestFilterPayload): FreightsRequest => (
     {
         type: freightsTypes.FREIGHTS_REQUEST,
+        payload
     }
 )
-export const FreightsSuccessAction = (payload: FreightsSuccessPayload): FreightsSuccess => (
+export const FreightsSuccessAction = (payload: Freight[]): FreightsSuccess => (
     {
         type: freightsTypes.FREIGHTS_SUCCESS,
         payload

@@ -9,12 +9,12 @@ import { useNavigate } from "react-router-dom";
 interface Props {
     open: boolean;
     handleToogle(open: boolean): any
-    handleLabel(label: string): any
 }
 
 function SideMenu(props: Props) {
-    const { open, handleToogle, handleLabel } = props
+    const { open, handleToogle } = props
     const navigate = useNavigate();
+    
 
 
     const data = [
@@ -29,7 +29,6 @@ function SideMenu(props: Props) {
                 <ListItem key={index}>
                     <ListItemButton onClick={() => {
                         navigate(item.link)
-                        handleLabel(item.name)
                     }}>
                         <ListItemIcon>{item.icon}</ListItemIcon>
                         <ListItemText primary={item.name} />

@@ -4,6 +4,12 @@ export enum freightsTypes {
     FREIGHTS_FAILURE = "FREIGHTS_FAILURE"
 }
 
+export enum filterTypes {
+    DRIVER = "DRIVER",
+    DESTINATION = "DESTINATION",
+    DATE = "DATE"
+}
+
 export interface FreightsState {
     success: boolean;
     finished: boolean;
@@ -28,17 +34,23 @@ export interface Freight {
     travelType: string;
 }
 
-export interface FreightsSuccessPayload {
-    Freights: Freight[]
+export interface RequestFilterPayload {
+    filterType: string,
+    filterText: string
 }
 
+
+export interface FreightsRequest {
+    type: typeof freightsTypes.FREIGHTS_REQUEST;
+    payload?: RequestFilterPayload
+}
 export interface FreightsRequest {
     type: typeof freightsTypes.FREIGHTS_REQUEST;
 }
 
 export interface FreightsSuccess {
     type: typeof freightsTypes.FREIGHTS_SUCCESS;
-    payload: FreightsSuccessPayload
+    payload: Freight[]
 };
 
 export interface FreightsFailure {
@@ -49,7 +61,6 @@ export type FreightsActions =
     | FreightsRequest
     | FreightsSuccess
     | FreightsFailure;
-
 
 
 

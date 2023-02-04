@@ -9,27 +9,15 @@ import Header from '../components/Header';
 
 function App() {
   const [open, setOpen] = useState(false)
-  const [label, setLabel] = useState("Upload de Fretes")
-
-  const ToogleSideMenu = (toogle: boolean) => {
-
-
-
-  }
-  const changLabel = (label: string) => {
-
-  }
 
   return (
     <div>
       <Header
         handleToogle={(toogle) => setOpen(toogle)}
-        label={label}
       />
       <SideMenu
         open={open}
         handleToogle={(toogle) => setOpen(toogle)}
-        handleLabel={(label) => setLabel(label)}
       />
 
       <Routes>

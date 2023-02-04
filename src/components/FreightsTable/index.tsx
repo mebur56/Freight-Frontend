@@ -10,83 +10,83 @@ import TableRow from '@mui/material/TableRow';
 import { Freight } from '../../features/freightsPage/interfaces'
 
 interface Column {
-    id: 'freightTable' | 'travelValue' | 'date' | 'travelNumber' | 'driver' | 'plate' | 'vechicleType' | 'origin' | 'destination'| 'boxes' | 'dellivery'| 'km' | 'travelType';
+    id: 'freightTable' | 'travelValue' | 'date' | 'travelNumber' | 'driver' | 'plate' | 'vechicleType' | 'origin' | 'destination' | 'boxes' | 'dellivery' | 'km' | 'travelType';
     label: string;
     minWidth?: number;
-    align?: 'right';
-    format?: (value: number) => string;
+    align?: 'center';
+    format?: (value: string) => string;
 }
 
 
 const columns: readonly Column[] = [
-    { id: 'freightTable', label: 'Tabela_Frete', minWidth: 170 },
-    { id: 'travelValue', label: 'Valor Viagem', minWidth: 100 },
+    { id: 'freightTable', label: 'Tabela_Frete', minWidth: 115 },
+    { id: 'travelValue', label: 'Valor', minWidth: 50 },
     {
         id: 'date',
         label: 'Data',
-        minWidth: 170,
-        align: 'right',
-        format: (value: number) => value.toLocaleString('pt-BR'),
+        minWidth: 115,
+        align: 'center',
+        format: (value: string) => new Date(value).toLocaleDateString('pt'),
     },
     {
         id: 'travelNumber',
-        label: 'Número da viagem',
-        minWidth: 170,
-        align: 'right',
+        label: 'Número',
+        minWidth: 70,
+        align: 'center',
     },
     {
         id: 'driver',
         label: 'Motorista',
         minWidth: 170,
-        align: 'right',
+        align: 'center'
     },
     {
         id: 'plate',
-        label: 'placa',
-        minWidth: 170,
-        align: 'right',
+        label: 'Placa',
+        minWidth: 100,
+        align: 'center'
     },
     {
         id: 'vechicleType',
         label: 'Veiculo',
-        minWidth: 170,
-        align: 'right',
+        minWidth: 100,
+        align: 'center'
     },
     {
         id: 'origin',
         label: 'Origem',
-        minWidth: 170,
-        align: 'right',
+        minWidth: 200,
+        align: 'center'
     },
     {
         id: 'destination',
         label: 'Destino',
-        minWidth: 170,
-        align: 'right',
+        minWidth: 200,
+        align: 'center'
     },
     {
         id: 'boxes',
         label: 'Caixas',
-        minWidth: 170,
-        align: 'right',
+        minWidth: 70,
+        align: 'center'
     },
     {
         id: 'dellivery',
         label: 'Entregas',
-        minWidth: 170,
-        align: 'right',
+        minWidth: 70,
+        align: 'center'
     },
     {
         id: 'km',
         label: 'km',
-        minWidth: 170,
-        align: 'right',
+        minWidth: 70,
+        align: 'center'
     },
     {
         id: 'travelType',
         label: 'Tipo de Viagem',
-        minWidth: 170,
-        align: 'right',
+        minWidth: 110,
+        align: 'center'
     },
 ];
 
@@ -95,7 +95,7 @@ interface Props {
     freights: Freight[]
 }
 
-export default function StickyHeadTable(props: Props) {
+export default function FreightTable(props: Props) {
     const { freights } = props
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -111,13 +111,14 @@ export default function StickyHeadTable(props: Props) {
     };
 
     return (
-        <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-            <TableContainer sx={{ maxHeight: 440 }}>
+        <Paper sx={{ overflow: 'hidden', backgroundColor: "lightGrey" }}>
+            <TableContainer sx={{ maxHeight: "50vh", backgroundColor: "white" }}>
                 <Table stickyHeader aria-label="sticky table">
                     <TableHead>
                         <TableRow>
                             {columns.map((column) => (
                                 <TableCell
+                                    sx={{ backgroundColor: "grey" }}
                                     key={column.id}
                                     align={column.align}
                                     style={{ minWidth: column.minWidth }}
@@ -137,7 +138,7 @@ export default function StickyHeadTable(props: Props) {
                                             const value = row[column.id];
                                             return (
                                                 <TableCell key={column.id} align={column.align}>
-                                                    {column.format && typeof value === 'number'
+                                                    {column.id === "date" && typeof value === 'string'
                                                         ? column.format(value)
                                                         : value}
                                                 </TableCell>

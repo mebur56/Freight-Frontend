@@ -4,13 +4,15 @@ import React from "react"
 
 interface Props {
     handleToogle(open: boolean): any
-    label: string
 }
 
 function Header(props: Props) {
-    const { handleToogle, label } = props
-
-
+    const { handleToogle } = props
+    const pathNames = [
+        { name: "Upload de Frete", link: "/" },
+        { name: "Fretes", link: "/freights" },
+    ]
+    const item = pathNames.find(x => x.link === window.location.pathname )
     return (
         <AppBar position="static">
             <Toolbar>
@@ -25,7 +27,7 @@ function Header(props: Props) {
                     <MenuIcon />
                 </IconButton>
                 <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                    {label}
+                    {item.name}
                 </Typography>
             </Toolbar>
         </AppBar>

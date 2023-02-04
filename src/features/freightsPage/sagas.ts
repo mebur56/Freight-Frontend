@@ -2,12 +2,12 @@ import { all, AxiosResponse } from "axios"
 import { call, put, takeEvery, takeLatest } from "redux-saga/effects"
 import * as api from "../../app/api"
 import { FreightsFailureAction, FreightsSuccessAction } from "./action"
-import { freightsTypes } from "./interfaces"
+import { FreightsRequest, freightsTypes } from "./interfaces"
 
 
-function* freightsFileSaga() {
+function* freightsFileSaga(action: FreightsRequest) {
     try {
-        const response: AxiosResponse = yield call(api.getFreights)
+        const response: AxiosResponse = yield call(api.getFreights, action.payload?.filterType, action.payload?.filterText)
         yield put(FreightsSuccessAction(response.data))
     }
     catch (e) {
