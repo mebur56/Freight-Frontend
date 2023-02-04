@@ -5,7 +5,7 @@ import { FreightsFailureAction, FreightsSuccessAction } from "./action"
 import { FreightsRequest, freightsTypes } from "./interfaces"
 
 
-function* freightsFileSaga(action: FreightsRequest) {
+export function* getFreightsSaga(action: FreightsRequest) {
     try {
         const response: AxiosResponse = yield call(api.getFreights, action.payload?.filterType, action.payload?.filterText)
         yield put(FreightsSuccessAction(response.data))
@@ -18,7 +18,7 @@ function* freightsFileSaga(action: FreightsRequest) {
 }
 
 function* freightsSaga() {
-    yield takeLatest(freightsTypes.FREIGHTS_REQUEST, freightsFileSaga)
+    yield takeLatest(freightsTypes.FREIGHTS_REQUEST, getFreightsSaga)
 }
 
 export default freightsSaga

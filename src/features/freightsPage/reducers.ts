@@ -1,10 +1,10 @@
-import { FreightsActions, FreightsState, freightsTypes } from "./interfaces"
+import { Freight, FreightsActions, FreightsState, freightsTypes } from "./interfaces"
 
 
 const initialState: FreightsState = {
     success: false,
     finished: false,
-    freights: null,
+    freights: [] as Freight[],
     pending: false,
 }
 

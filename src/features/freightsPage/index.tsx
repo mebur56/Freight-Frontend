@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../app/store";
 import { FreightsRequestAction } from "./action";
 import Table from "../../components/FreightsTable"
-import { MenuItem, Select, TextField } from '@mui/material';
-
+import { Chip, CircularProgress, MenuItem, Select, TextField } from '@mui/material';
+import InfoIcon from '@mui/icons-material/Info';
 import styles from "./styles";
 import { filterTypes } from "./interfaces";
 
@@ -20,7 +20,7 @@ const FreightsPage = () => {
   }, [filterText, filterType])
 
 
-  const { freights } = useSelector(
+  const { freights, pending } = useSelector(
     (state: RootState) => state.reducer.freightsPage
   )
   const inputChanged = () => {
@@ -50,23 +50,33 @@ const FreightsPage = () => {
           value={filterText}
           onChange={(e) => {
             setFilterText(e.target.value)
-            
+
           }}
-          placeholder="Digite Para Filtrar..." />
+          placeholder="Procurar..." />
       </div>
-      <div style={styles.subscribeContainer}>
-        {freights?.length ?
-          (<Table
-            freights={freights}
-          />
+      {pending ?
+        (
+          <div style={styles.circularProgress}>
+            <CircularProgress size={120} />
+          </div>
+        ) : freights?.length ?
+          (
+            <div style={styles.subscribeContainer}>
+              <Table
+                freights={freights}
+              />
+            </div>
           ) :
           (
-            <div>
+            <div style={styles.circularProgress}>
+              <Chip
+                avatar={<InfoIcon />}
+                label={"Nenhum dado encontrado"}
+              />
             </div>
 
           )
-        }
-      </div>
+      }
     </div>
   );
 }

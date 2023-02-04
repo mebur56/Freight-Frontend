@@ -5,15 +5,17 @@ import { UploadFailureAction, UploadSuccessAction } from "./action"
 import { UploadRequest, uploadTypes } from "./interfaces"
 
 
-function* uploadFileSaga(action: UploadRequest) {
+export function* uploadFileSaga(action: UploadRequest) {
     try {
         const response: AxiosResponse = yield call(api.uploadFile, action.payload.fileForm)
         yield put(UploadSuccessAction())
+        return;
     }
     catch (e) {
         yield put(
             UploadFailureAction()
         )
+        return;
     }
 }
 
