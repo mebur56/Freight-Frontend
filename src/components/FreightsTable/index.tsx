@@ -8,6 +8,7 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import { Freight } from '../../features/freightsPage/interfaces'
+import { valueToPercent } from '@mui/base';
 
 interface Column {
     id: 'freightTable' | 'travelValue' | 'date' | 'travelNumber' | 'driver' | 'plate' | 'vechicleType' | 'origin' | 'destination' | 'boxes' | 'dellivery' | 'km' | 'travelType';
@@ -18,9 +19,18 @@ interface Column {
 }
 
 
+
 const columns: readonly Column[] = [
-    { id: 'freightTable', label: 'Tabela_Frete', minWidth: 115 },
-    { id: 'travelValue', label: 'Valor', minWidth: 50 },
+    {
+        id: 'freightTable',
+        label: 'Tabela_Frete',
+        minWidth: 115,
+    },
+    {
+        id: 'travelValue',
+        label: 'Valor',
+        minWidth: 50,
+    },
     {
         id: 'date',
         label: 'Data',
@@ -140,7 +150,7 @@ export default function FreightTable(props: Props) {
                                                 <TableCell key={column.id} align={column.align}>
                                                     {column.id === "date" && typeof value === 'string'
                                                         ? column.format(value)
-                                                        : value}
+                                                        : value ? value : "N/A"}
                                                 </TableCell>
                                             );
                                         })}

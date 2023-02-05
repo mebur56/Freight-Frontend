@@ -30,6 +30,7 @@ export default (state = initialState, action: FreightsActions) => {
                 success: false,
                 finished: true,
                 pending: false,
+                freights: []
             }
 
         default:
