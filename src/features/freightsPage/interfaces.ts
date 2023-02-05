@@ -7,12 +7,12 @@ export enum freightsTypes {
 export enum filterTypes {
     DRIVER = "DRIVER",
     DESTINATION = "DESTINATION",
+    ORIGIN = "ORIGIN",
     DATE = "DATE"
 }
 
 export interface FreightsState {
     success: boolean;
-    finished: boolean;
     freights: Freight[];
     pending: boolean;
 }

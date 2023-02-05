@@ -43,6 +43,7 @@ const FreightsPage = () => {
         >
           <MenuItem value={filterTypes.DRIVER}>Motorista</MenuItem>
           <MenuItem value={filterTypes.DATE}>Data</MenuItem>
+          <MenuItem value={filterTypes.ORIGIN}>Origem</MenuItem>
           <MenuItem value={filterTypes.DESTINATION}>Destino</MenuItem>
         </Select>
         <TextField
