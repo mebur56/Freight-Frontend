@@ -9,7 +9,7 @@ const subscribeContainer: CSSProperties = {
     margin: "40px 0px",
 }
 
-const circularProgress: CSSProperties = {
+const centerContent: CSSProperties = {
     position: "absolute",
     top: "50%",
     left: "45%",
@@ -19,5 +19,5 @@ const circularProgress: CSSProperties = {
 export default {
     container,
     subscribeContainer,
-    circularProgress,
+    centerContent,
 }

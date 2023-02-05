@@ -8,7 +8,17 @@ import { FreightsRequest, freightsTypes } from "./interfaces"
 export function* getFreightsSaga(action: FreightsRequest) {
     try {
         const response: AxiosResponse = yield call(api.getFreights, action.payload?.filterType, action.payload?.filterText)
-        yield put(FreightsSuccessAction(response.data))
+        switch (response.status) {
+            case 200:
+                yield put(FreightsSuccessAction(response.data))
+                break;
+            case 204:
+                yield put(FreightsSuccessAction([]))
+                break;
+            default:
+                FreightsFailureAction()
+
+        }
     }
     catch (e) {
         yield put(

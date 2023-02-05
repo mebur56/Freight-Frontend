@@ -3,6 +3,7 @@ import { takeLatest } from 'redux-saga/effects';
 import { UploadRequest, uploadTypes } from '../interfaces';
 import uploadSaga, { uploadFileSaga } from '../sagas';
 import * as api from "../../../app/api"
+import { AxiosResponse } from 'axios';
 describe('Upload Sagas', () => {
     const genObject = uploadSaga();
 
@@ -16,8 +17,16 @@ describe('Upload Sagas', () => {
 
 describe('Upload Sagas Request', () => {
     it('should call api and dispatch success action', async () => {
+
+        const mockResponse: AxiosResponse = {
+            data: "test",
+            status: 201,
+            statusText: '',
+            headers: undefined,
+            config: undefined
+        }
         const uploadRequest = jest.spyOn(api, 'uploadFile')
-            .mockImplementation(() => Promise.resolve(null));
+            .mockImplementation(() => Promise.resolve(mockResponse));
 
         const dispatched: any[] = [];
         const mockUpload: UploadRequest = {
@@ -32,6 +41,7 @@ describe('Upload Sagas Request', () => {
         expect(dispatched[0]).toEqual({ type: uploadTypes.UPLOAD_SUCCESS });
         uploadRequest.mockClear();
     });
+
     it('should call api and dispatch failure action', async () => {
         const uploadRequest = jest.spyOn(api, 'uploadFile')
             .mockImplementation(() => Promise.reject());

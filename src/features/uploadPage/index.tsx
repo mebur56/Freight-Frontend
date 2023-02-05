@@ -13,19 +13,33 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import WarningIcon from '@mui/icons-material/Warning';
 
 const UploadPage = () => {
-  const dispatch = useDispatch();
   const [file, setFile] = useState(null);
   const [snackOpen, setSnackOpen] = useState(false);
+  const [snackMessage, setSnackMessage] = useState("")
+  const [variant, setVariant] = useState(null)
+  const dispatch = useDispatch();
+  
   const { success, pending, finished } = useSelector(
     (state: RootState) => state.reducer.uploadPage
   )
 
   useEffect(() => {
     setSnackOpen(!pending && finished)
+    success ? updateSnackBar("Seu arquivo foi enviado com sucesso", variantTypes.SUCCESS)
+    : updateSnackBar("Houve um problema no envio do arquivo", variantTypes.ERROR)
+    
   }, [success, pending])
-
-
+  
+  const updateSnackBar = (message: string, variant: variantTypes) => {
+    setSnackMessage(message);
+    setVariant(variant);
+  }
   const onSubmit = () => {
+    if (!file) {
+      updateSnackBar("Nenhum arquivo selecionado", variantTypes.WARNING)
+      setSnackOpen(true);
+      return;
+    }
     var fileForm = new FormData()
     fileForm.append("file", file)
     dispatch(UploadRequestAction({ fileForm }));
@@ -67,8 +81,8 @@ const UploadPage = () => {
 
       <CustomSnackBar
         open={snackOpen}
-        variant={success ? variantTypes.SUCCESS : variantTypes.ERROR}
-        message={success ? "Seu arquivo foi enviado com sucesso" : "Houve um problema no envio do arquivo"}
+        variant={variant}
+        message={snackMessage}
         handleClose={() => setSnackOpen(false)}
       />
 

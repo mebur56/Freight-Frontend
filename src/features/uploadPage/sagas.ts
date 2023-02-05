@@ -8,7 +8,15 @@ import { UploadRequest, uploadTypes } from "./interfaces"
 export function* uploadFileSaga(action: UploadRequest) {
     try {
         const response: AxiosResponse = yield call(api.uploadFile, action.payload.fileForm)
-        yield put(UploadSuccessAction())
+        switch (response.status) {
+            case 201:
+                yield put(UploadSuccessAction())
+                break;
+            default:
+                UploadFailureAction()
+                break;
+
+        }
         return;
     }
     catch (e) {

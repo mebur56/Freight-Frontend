@@ -2,7 +2,7 @@
 
 This is a sample project build on React buildin on Webpack with Typescript,
 
-This Project is the fronend application, his counterpart is needed to be fully functional. See [Freight](https://github.com/mebur56/Freight)
+This Project is the frontend application, his counterpart is needed to be fully functional. See [Freight](https://github.com/mebur56/Freight)
 
 
 ## Getting Started

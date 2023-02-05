@@ -15,13 +15,13 @@ describe('Freight Sagas', () => {
 });
 
 
-describe('Freight Sagas Requestsdf', () => {
+describe('Freight Sagas Requests', () => {
     it('should call api and dispatch success action', async () => {
 
 
         const mockResponse: AxiosResponse = {
             data: "test",
-            status: 0,
+            status: 200,
             statusText: '',
             headers: undefined,
             config: undefined

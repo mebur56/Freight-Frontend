@@ -20,7 +20,7 @@ const FreightsPage = () => {
   }, [filterText, filterType])
 
 
-  const { freights, pending } = useSelector(
+  const { freights, pending, success } = useSelector(
     (state: RootState) => state.reducer.freightsPage
   )
   const inputChanged = () => {
@@ -33,7 +33,6 @@ const FreightsPage = () => {
 
     setTimer(newTimer)
   }
-
 
   return (
     <div className="column" style={styles.container}>
@@ -54,28 +53,37 @@ const FreightsPage = () => {
           }}
           placeholder="Procurar..." />
       </div>
-      {pending ?
+      {!success ?
         (
-          <div style={styles.circularProgress}>
-            <CircularProgress size={120} />
+          <div style={styles.centerContent}>
+            <Chip
+              avatar={<InfoIcon />}
+              label={"Não foi possivél consultar os dados"}
+            />
           </div>
-        ) : freights?.length ?
+        ) :
+        pending ?
           (
-            <div style={styles.subscribeContainer}>
-              <Table
-                freights={freights}
-              />
+            <div style={styles.centerContent}>
+              <CircularProgress size={120} />
             </div>
-          ) :
-          (
-            <div style={styles.circularProgress}>
-              <Chip
-                avatar={<InfoIcon />}
-                label={"Nenhum dado encontrado"}
-              />
-            </div>
+          ) : freights?.length ?
+            (
+              <div style={styles.subscribeContainer}>
+                <Table
+                  freights={freights}
+                />
+              </div>
+            ) :
+            (
+              <div style={styles.centerContent}>
+                <Chip
+                  avatar={<InfoIcon />}
+                  label={"Nenhum dado encontrado"}
+                />
+              </div>
 
-          )
+            )
       }
     </div>
   );
