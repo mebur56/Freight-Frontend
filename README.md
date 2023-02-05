@@ -30,7 +30,7 @@ Open a terminal on the root of the project and type
 
 ## Running unit tests
 
-To run unit test simple type and exec:
+To run unit test exec
 
 ```yarn jest ```
 
