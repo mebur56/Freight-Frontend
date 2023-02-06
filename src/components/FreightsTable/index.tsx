@@ -22,16 +22,6 @@ interface Column {
 
 const columns: readonly Column[] = [
     {
-        id: 'freightTable',
-        label: 'Tabela_Frete',
-        minWidth: 115,
-    },
-    {
-        id: 'travelValue',
-        label: 'Valor',
-        minWidth: 50,
-    },
-    {
         id: 'date',
         label: 'Data',
         minWidth: 115,
@@ -97,6 +87,16 @@ const columns: readonly Column[] = [
         label: 'Tipo de Viagem',
         minWidth: 110,
         align: 'center'
+    },
+    {
+        id: 'freightTable',
+        label: 'Tabela_Frete',
+        minWidth: 115,
+    },
+    {
+        id: 'travelValue',
+        label: 'Valor',
+        minWidth: 50,
     },
 ];
 
